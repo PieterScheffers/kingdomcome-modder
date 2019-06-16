@@ -1,0 +1,26 @@
+{
+  "name": "kingdom-come-modder",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "bin": {
+    "kcdmod": "./src/cmd.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "engines" : {
+    "node" : ">=10"
+  },
+  "dependencies": {
+    "commander": "^2.20.0",
+    "get-stream": "^5.1.0",
+    "jszip": "^3.2.1",
+    "node-stream-zip": "^1.8.0",
+    "rimraf": "^2.6.3",
+    "xmldom-fork": "^0.1.28"
+  }
+}
