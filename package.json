@@ -1,7 +1,8 @@
 {
   "name": "kcd-modder",
   "version": "1.0.0",
-  "description": "",
+  "description": "Kingdom Come Deliverance modder",
+  "homepage": "https://github.com/PieterScheffers/kingdomcome-modder",
   "main": "src/index.js",
   "bin": {
     "kcdmod": "./src/cmd.js"
@@ -9,8 +10,19 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "kingdom",
+    "come",
+    "deliverance",
+    "mods",
+    "modding",
+    "modding-tools"
+  ],
+  "author": "Pieter Scheffers <info@pieterscheffers.nl> (https://www.pieterscheffers.nl)",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/PieterScheffers/kingdomcome-modder.git"
+  },
   "license": "MIT",
   "engines" : {
     "node" : ">=10"
