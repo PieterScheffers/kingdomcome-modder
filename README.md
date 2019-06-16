@@ -1,10 +1,15 @@
-# Kingdom Come Deliverance modder
+# Kingdom Come Deliverance modder [![npm version](https://badge.fury.io/js/kcd-modder.svg)](https://badge.fury.io/js/kcd-modder)
 After every update of Kingdom Come Deliverance all mods would have to be updated.
 This program describes the mods as changes to the XML files and executes these changes.
 So if Kingdom Come ever updates, just run this program again and all mods are updated.
 
 The plugins are small js files with the modifications to the XML files. This modder applies those modifications and creates the mods.
 When multiple plugins use the same file, this modder automatically puts all those plugins in the same mod.
+
+## Install
+```bash
+npm install kcd-modder
+```
 
 ## Usage
 ```js
