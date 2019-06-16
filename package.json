@@ -1,6 +1,6 @@
 {
   "name": "kcd-modder",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Kingdom Come Deliverance modder",
   "homepage": "https://github.com/PieterScheffers/kingdomcome-modder",
   "main": "src/index.js",
@@ -24,8 +24,8 @@
     "url": "git://github.com/PieterScheffers/kingdomcome-modder.git"
   },
   "license": "MIT",
-  "engines" : {
-    "node" : ">=10"
+  "engines": {
+    "node": ">=10"
   },
   "dependencies": {
     "commander": "^2.20.0",
