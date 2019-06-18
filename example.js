@@ -3,7 +3,7 @@ const modKingdomCome = require('./src')
 const gameDir = 'C:\\Games\\Steam\\SteamApps\\common\\KingdomComeDeliverance'
 
 const plugins = [
-  // require('./plugins/superBuff'),
+  require('./plugins/superBuff'),
   require('./plugins/unleveledPerks'),
   require('./plugins/maxSkillAndPerkPoints'),
   require('./plugins/moreHares'),
