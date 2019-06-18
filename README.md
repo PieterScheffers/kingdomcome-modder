@@ -21,7 +21,7 @@ const plugins = [
   modKingdomCome.plugins['more-hares'],
   {
     name: 'alternate-food-spoil',
-    order: 600, // Used for plugin ordering. A plugin that should always run last should have a order
+    order: 600, // Used for plugin ordering. A plugin that should always run last should have a high order number
     files: [ // Array with all files that should be modified. The files are modified in the order of this array
       {
         file: 'Libs/Tables/item/food.xml', // file to modify
