@@ -12,6 +12,7 @@ module.exports = async function modKingdomCome (gameDir, plugins = []) {
   // if (!plugins.length) throw new Error('No plugins defined')
 
   // Group plugins by file to get all plugins that should be in the same mod
+  // { [modFile]: pluginName[] }
   const pluginsGroupedByFile = plugins.reduce((acc, plugin) => {
     return plugin.files.reduce((accum, obj) => {
       return { ...accum, [obj.file]: [ ...(accum[obj.file] || []), plugin.name ] }
@@ -20,6 +21,7 @@ module.exports = async function modKingdomCome (gameDir, plugins = []) {
   console.log('pluginsGroupedByFile', JSON.stringify(pluginsGroupedByFile, null, 2))
 
   // Group all plugins by mod
+  // [ { plugins: pluginName[], files: modFile[] } ]
   const mods = Object.keys(pluginsGroupedByFile).reduce((acc, file) => {
     const pluginNames = pluginsGroupedByFile[file]
 
@@ -64,7 +66,11 @@ module.exports = async function modKingdomCome (gameDir, plugins = []) {
     const modDataDir = path.join(modDir, 'data')
     await fs.mkdir(modDataDir, { recursive: true })
 
-    for (const modFile of mod.files) {
+    // Get the contents of all XMLs in mod
+    // { [modFile]: { modFile, doc, zipFile } }
+    const xmls = await mod.files.reduce(async (promise, modFile) => {
+      const acc = await promise
+
       // Create directory for file
       const fileDir = path.join(modDataDir, path.dirname(modFile))
       await fs.mkdir(fileDir, { recursive: true })
@@ -83,18 +89,35 @@ module.exports = async function modKingdomCome (gameDir, plugins = []) {
       const zipFile = zipFiles[0]
       const fileContents = await getZipFileContents(zipFile, modFile)
 
-      let doc = xmlStringToDocument(fileContents)
+      const doc = xmlStringToDocument(fileContents)
 
-      // Run plugins over file
-      for (const pluginName of mod.plugins) {
-        const plugin = plugins.find(p => p.name === pluginName)
-        const pluginFile = plugin.files.find(f => f.file === modFile)
+      const entry = { modFile, doc, zipFile }
+      return { ...acc, [modFile]: entry }
+    }, {})
 
-        if (pluginFile && typeof pluginFile.modifyFile === 'function') {
-          await pluginFile.modifyFile(doc, modifyMethods)
-        }
+    // Sort plugins on plugin.order (default: 500)
+    mod.plugins.sort((p1, p2) => {
+      const plugin1 = plugins.find(p => p.name === p1)
+      const plugin2 = plugins.find(p => p.name === p2)
+
+      const order1 = (plugin1 && plugin1.order) || 500
+      const order2 = (plugin2 && plugin2.order) || 500
+
+      return order1 - order2
+    })
+
+    // Run all plugins over the files
+    // The files of a plugin are run in the order of the plugin.files array
+    for (const pluginName of mod.plugins) {
+      const plugin = plugins.find(p => p.name === pluginName)
+
+      for (const fileObj of plugin.files) {
+        const doc = xmls[fileObj.file].doc
+        await fileObj.modifyFile(doc, modifyMethods)
       }
+    }
 
+    for (const { modFile, doc, zipFile } of Object.values(xmls)) {
       // Re-create XML and write to file
       const xml = documentToXmlString(doc)
       const xmlPath = path.join(modDataDir, modFile)
