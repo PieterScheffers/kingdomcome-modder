@@ -4,7 +4,7 @@ module.exports = {
     {
       file: 'Libs/AI/final/dynamic.xml',
       pakFile: null,
-      modifyFile: async (doc, { findOneDeep, setAttr, addChildElement }) => {
+      modifyFile: async (doc, { findOneDeep, setAttr }) => {
         const behaviorTree = findOneDeep(doc.documentElement, { name: 'BehaviorTree', attr: { name: 'dynamic_on_update' } })
         if (!behaviorTree) throw new Error('[more-hares][Libs/AI/final/dynamic.xml] Error: BehaviorTree with attribute name="dynamic_on_update" not found')
 

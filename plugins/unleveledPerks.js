@@ -4,7 +4,7 @@ module.exports = {
     {
       file: 'Libs/Tables/rpg/perk.xml',
       pakFile: null,
-      modifyFile: async (doc, { findDeep, setAttr, addChildElement, generateId }) => {
+      modifyFile: async (doc, { findDeep, setAttr }) => {
         const rows = findDeep(doc.documentElement, { name: 'row' })
         if (!rows.length) throw new Error('[unleveled-perks][Libs/Tables/rpg/perk.xml] Error: row elements not found')
 

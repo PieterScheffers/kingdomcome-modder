@@ -38,9 +38,24 @@ module.exports = {
         // visual_effect=""
         // />
 
+        const params = [
+          'xpm*3.00', // 3x the experience gain
+          'vis*2.0', // 2x better vision
+          'owl+1', // Nightowl
+          'Sprint+1.5', // Faster sprinting speed
+          'StaminaSprint*0.1', // Less stamina used when sprinting
+          'Run+1.5', // Faster running speed
+          'Walk+1.5', // Faster walking speed
+          'bma+1', // Double herb selling price
+          'fsm=0', // No noise of footsteps
+          'rml+10', // More money when looting
+          'srg*2', // Faster stamina regeneration
+          'rms*1.2' // Faster horse
+        ].join(',')
+
         addChildElement(rowsElement, {
           name: 'row',
-          attributes: {
+          attr: {
             buff_ai_tag_id: '',
             buff_class_id: '4',
             buff_desc: '',
@@ -56,7 +71,7 @@ module.exports = {
             icon_id: '0',
             implementation: 'Cpp:Constant',
             is_persistent: 'True',
-            params: 'weapon_bow+100,xpm*3.00',
+            params,
             slot_buff_ui_name: '',
             slot_icon_id: '',
             visual_effect: ''
@@ -95,7 +110,7 @@ module.exports = {
 
         addChildElement(rowsElement, {
           name: 'row',
-          attributes: {
+          attr: {
             autolearnable: 'False',
             exclude_in_game_mode: '',
             icon_id: 'headcrakcer',
@@ -105,7 +120,7 @@ module.exports = {
             perk_id: perkId,
             perk_name: 'SuperBuff',
             perk_ui_desc: '',
-            perk_ui_name: 'ui_tutorial_name_skills',
+            perk_ui_name: 'ui_codex_name_dobyvani_KH',
             skill_selector: '25',
             stat_selector: '',
             ui_priority: '0',
@@ -132,7 +147,7 @@ module.exports = {
 
         addChildElement(rowsElement, {
           name: 'row',
-          attributes: {
+          attr: {
             buff_id: buffId,
             perk_id: perkId
           }
