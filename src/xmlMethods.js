@@ -174,7 +174,7 @@ function setAttr (element, key, value) {
  * @param {string} options.name Name of new Element
  * @param {object} options.attributes Attributes of new Element
  */
-function addChildElement (element, { name, attributes = {} }) {
+function addChildElement (element, { name, attr = {} }) {
   if (!name) throw new Error('Name of new Element should be set')
 
   // Get the last Textnode with a newline
@@ -190,11 +190,38 @@ function addChildElement (element, { name, attributes = {} }) {
   lastChild ? element.insertBefore(newElement, lastChild) : element.appendChild(newTextNode)
 
   // Add attributes to the new Element
-  for (const [ key, value ] of Object.entries(attributes)) {
+  for (const [ key, value ] of Object.entries(attr)) {
     setAttr(newElement, key, value)
   }
 
   return newElement
+}
+
+/**
+ * Append or edit attributes on a child Element
+ * @param {Element} parent Parent Element node
+ * @param {object} options
+ * @param {string} options.name Name of the Element to find
+ * @param {object} options.attr Attributes of the Element to find
+ * @param {object} attributes Attributes to set on Element
+ */
+function addOrSetElement (parent, findOptions, attributes) {
+  const element = findOneChild(parent, findOptions)
+
+  if (!element) {
+    addChildElement(parent, {
+      name: findOptions.name,
+      attr: {
+        ...findOptions.attr,
+        ...attributes
+      }
+    })
+  } else {
+    // Modify attributes on the Element
+    for (const [ key, value ] of Object.entries(attributes)) {
+      setAttr(element, key, value)
+    }
+  }
 }
 
 /**
@@ -242,6 +269,7 @@ module.exports = {
   findAttr,
   setAttr,
   addChildElement,
+  addOrSetElement,
   generateId,
   generateUniqueId
 }
