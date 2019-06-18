@@ -21,11 +21,11 @@ const plugins = [
   modKingdomCome.plugins['more-hares'],
   {
     name: 'alternate-food-spoil',
-    files: [
+    order: 600, // Used for plugin ordering. A plugin that should always run last should have a order
+    files: [ // Array with all files that should be modified. The files are modified in the order of this array
       {
-        file: 'Libs/Tables/item/food.xml',
-        pakFile: null,
-        modifyFile: async (doc, { findDeep, setAttr }) => {
+        file: 'Libs/Tables/item/food.xml', // file to modify
+        modifyFile: async (doc, { findDeep, setAttr }) => { // async function that modifies the XML DomDocument
           const rows = findDeep(doc.documentElement, { name: 'row', attr: { decay_time_hours: '' } })
           if (!rows.length) throw new Error(`[alternate-food-spoil][Libs/Tables/item/food.xml] Error: rows with attribute decay_time_hours not found`)
 
@@ -53,6 +53,8 @@ modKingdomCome(gameDir, plugins).catch(error => console.error('KCD Modder Error'
 - Write mods to a temporary folder
 - Read XML into a DomDocument model and write it back to XML
 - Create some methods to easily modify DomDocument model
+- Modify files in the order of the plugin.files array
+- Apply plugins in the order of plugin.order (higher is later) (default: 500)
 
 ## Roadmap (TODO)
 - Backup old mods in Kingdom Come Mods folder and install new ones
