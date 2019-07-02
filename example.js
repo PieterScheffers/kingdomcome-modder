@@ -12,7 +12,8 @@ const plugins = [
   require('./plugins/alternateFoodSpoil'),
   require('./plugins/moreRandomEvents'),
   require('./plugins/biancasRing'),
-  require('./plugins/bowChargeDuration')
+  require('./plugins/bowChargeDuration'),
+  require('./plugins/rpgParam')
 ]
 
 modKingdomCome(gameDir, plugins).catch(error => console.error('KCD Modder Error', error))
