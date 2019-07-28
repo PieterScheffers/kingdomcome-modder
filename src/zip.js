@@ -80,6 +80,71 @@ async function findFileInZipFiles (dir, file) {
   return foundZipFiles
 }
 
+/**
+ * Find a string in a datafile in a zipfile
+ * @param {string} dir Path to data folder of Kingdom Come Deliverance
+ * @param {function} find Function to check if something has been found
+ * @param {function} fileFilter Filter files from zipfiles
+ * @param {function} reportProgress Function to report progress
+ */
+async function findStringInZipFiles (dir, find, fileFilter = () => {}, reportProgress = () => {}) {
+  const zipFiles = await readdirRecursively(dir)
+  const totalZipFiles = zipFiles.length
+
+  const found = []
+
+  for (let j = 0; j < zipFiles.length; j++) {
+    const zipFile = zipFiles[j]
+    const zipFileNumber = j + 1
+
+    const entries = await getZipFileListing(zipFile).catch(() => ({}))
+    const zipFileFiles = Object.keys(entries)
+    const zipFileFilesLength = zipFileFiles.length
+
+    for (let k = 0; k < zipFileFilesLength; k++) {
+      const zipFileFile = zipFileFiles[k]
+
+      // filter files
+      if (fileFilter && !fileFilter(zipFileFile)) continue
+
+      const content = await getZipFileContents(zipFile, zipFileFile)
+      const lines = content.split(/\r\n|\n|\r/)
+      const linesLength = lines.length
+
+      for (let i = 0; i < linesLength; i++) {
+        const line = lines[i]
+        const lineNumber = i + 1
+        let currentFind = null
+
+        if (find && find(line)) {
+          currentFind = {
+            line: lineNumber,
+            zipFile,
+            file: zipFileFile
+          }
+
+          found.push(currentFind)
+        }
+
+        reportProgress && reportProgress({
+          line: lineNumber,
+          linesLength,
+          zipFile,
+          file: zipFileFile,
+          totalZipFiles,
+          zipFileNumber,
+          foundLength: found.length,
+          zipFileFilesLength,
+          zipFileFilesNumber: k + 1,
+          currentFind
+        })
+      }
+    }
+  }
+
+  return found
+}
+
 async function findAllFilesInZip (dir) {
   const zipFiles = await readdirRecursively(dir)
 
@@ -144,5 +209,6 @@ module.exports = {
   findFileInZipFiles,
   findAllFilesInZip,
   writeJsZip,
-  zipFolder
+  zipFolder,
+  findStringInZipFiles
 }

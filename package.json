@@ -33,6 +33,7 @@
     "jszip": "^3.2.1",
     "node-stream-zip": "^1.8.0",
     "rimraf": "^2.6.3",
-    "xmldom-fork": "^0.1.28"
+    "xmldom-fork": "^0.1.28",
+    "node-status": "^1.0.0"
   }
 }
