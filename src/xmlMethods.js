@@ -198,6 +198,26 @@ function addChildElement (element, { name, attr = {} }) {
 }
 
 /**
+ * Edit attributes on a child Element
+ * @param {Element} parent Parent Element node
+ * @param {object} options
+ * @param {string} options.name Name of the Element to find
+ * @param {object} options.attr Attributes of the Element to find
+ * @param {object} attributes Attributes to set on Element
+ * @returns {boolean} Whether it succeeded in setting attributes
+ */
+function setElement(parent, findOptions, attributes) {
+  const element = findOneChild(parent, findOptions)
+  if (!element) return false
+
+  for (const [ key, value ] of Object.entries(attributes)) {
+    setAttr(element, key, value)
+  }
+
+  return true
+}
+
+/**
  * Append or edit attributes on a child Element
  * @param {Element} parent Parent Element node
  * @param {object} options
@@ -269,6 +289,7 @@ module.exports = {
   findAttr,
   setAttr,
   addChildElement,
+  setElement,
   addOrSetElement,
   generateId,
   generateUniqueId
