@@ -31,9 +31,9 @@
     "commander": "^2.20.0",
     "get-stream": "^5.1.0",
     "jszip": "^3.2.1",
+    "node-status": "^1.0.0",
     "node-stream-zip": "^1.8.0",
     "rimraf": "^2.6.3",
-    "xmldom-fork": "^0.1.28",
-    "node-status": "^1.0.0"
+    "xmldom-fork": "^0.1.28"
   }
 }
