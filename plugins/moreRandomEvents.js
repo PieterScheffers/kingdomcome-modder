@@ -14,7 +14,7 @@ module.exports = {
         for (const row of rows) {
           const attr = findAttr(row, 'cooldown')
           const [ , number, unit ] = attr.value.match(/([0-9]*)(.*)/)
-          const cooldown = Math.max(1, Math.floor(number / 9))
+          const cooldown = number <= 1 ? number : Math.max(1, Math.floor(number / 9))
 
           setAttr(row, 'cooldown', `${cooldown}${unit}`)
         }
