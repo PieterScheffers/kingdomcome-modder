@@ -12,9 +12,9 @@ module.exports = {
           const attr = findAttr(row, 'change')
           const reputationChange = parseFloat(attr.value)
 
-          const newReputationChange = reputationChange < 0 ? reputationChange / 2 : (reputationChange > 0 ? reputationChange * 2 : reputationChange)
+          const newReputationChange = Math.max(Math.min(reputationChange < 0 ? reputationChange / 100 : (reputationChange > 0 ? reputationChange * 200 : reputationChange), 100), -100)
 
-          setAttr(row, 'change', newReputationChange.toFixed(6))
+          setAttr(row, 'change', newReputationChange.toFixed(6).replace(/0+$/, ''))
         }
       }
     }
