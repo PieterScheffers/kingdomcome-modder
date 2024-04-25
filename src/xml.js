@@ -48,7 +48,7 @@ function documentToXmlString (doc) {
         case '>': return '&gt;'
         case '&': return '&amp;'
         case '"': return '&quot;'
-        case "'": return '&apos;'
+        // case "'": return '&apos;'
         default:
           return '&#' + String(value.charCodeAt()).padStart(2, '0') + ';'
       }
@@ -56,7 +56,7 @@ function documentToXmlString (doc) {
 
     switch (nodeType) {
       case NodeType.ATTRIBUTE_NODE:
-        return value.replace(/[\t\n\r'"&<>]/g, xmlEncoder)
+        return value.replace(/[\t\n\r"&<>]/g, xmlEncoder) // /[\t\n\r'"&<>]/g
       case NodeType.TEXT_NODE:
         return value.replace(/[&<>]/g, xmlEncoder)
       default:
