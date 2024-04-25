@@ -56,19 +56,49 @@ module.exports = {
         // ].join(',')
 
         const params = [
-          'xpm*10.00', // 3x the experience gain
+          'xpm*2.00', // 2x the experience gain
           'vis*4.0', // 2x better vision
           'owl+1', // Nightowl
-          'Sprint+5', // Faster sprinting speed
-          'StaminaSprint*0.1', // Less stamina used when sprinting
-          'Run+1.5', // Faster running speed
-          'Walk+1.5', // Faster walking speed
-          'bma+8', // Double herb selling price
-          'fsm=0', // No noise of footsteps
-          'rml+90', // More money when looting
-          'srg*4', // Faster stamina regeneration
+          'Sprint+1.5', // Faster sprinting speed
+          'StaminaSprint*0.01', // Less stamina used when sprinting
+          'Run+1.0', // Faster running speed
+          'Walk+1.0', // Faster walking speed
+          'bma+20.0', // Double herb selling price
+          'fsm*0.01', // No noise of footsteps
+          'rml+200', // More money when looting
+          'srg*10', // Faster stamina regeneration
           'rms*2.9', // Faster horse
           'fdm*0.01', // lower fall damage
+          'hko+0.5', // head cracker
+          'noi*0.01', // noise
+          'pds*0.01', // how fast lockpicks break
+          'lpb*0.1', // lockpicking
+          'lpn*0.1', // lockpicking noise
+          'hml=0', // Rider throw off
+          'pdp*1.15', // strong thighs
+          'health+0.125/s', // health regeneration
+          'con=-10', // conspictiones
+          'evi-1', // visibilty
+          'edm*0.01', // wear and tear to clothing
+          'vib=-10', // stand out
+          'cap+99999', // inventory capacity
+          'pos+20', // see items when pickpocketing
+          'iex+3', // reveals stats when pickpocketing
+          'cha=20', // charisma
+          'hgs+1', // train strength when picking flowers
+          'lfu=1', // chance that lock opens when lockpick breaks
+          'was*0.2', // bow shakes
+          'lcs*0.2', // bow shakes
+          'dsl*10', // how easy it is to evade attacks
+          'pt1+0.5', // throwing dice
+          'pt5+0.5', // throwing dice
+          'dtf+0.75', // throwing dice
+          'dbf+0.25', // throwing dice
+          'cli+1', // clinch win
+          'bso+0.5', // buy stolen goods
+          'hac+10', // final offer
+          'defense+3',
+          // hgs
         ].join(',')
 
         addChildElement(rowsElement, {
