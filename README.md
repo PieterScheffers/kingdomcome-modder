@@ -6,6 +6,8 @@ So if Kingdom Come ever updates, just run this program again and all mods are up
 The plugins are small js files with the modifications to the XML files. This modder applies those modifications and creates the mods.
 When multiple plugins use the same file, this modder automatically puts all those plugins in the same mod.
 
+Update 2025: This modder works also for Kingdom come Deliverance 2!
+
 ## Install
 ```bash
 npm install kcd-modder
