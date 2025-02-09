@@ -135,8 +135,14 @@ function findOneDeep (elements, options) {
  * @returns {object} Attribute object
  */
 function findAttr (element, key, value = '') {
-  const elementAttr = Object.values(element.attributes || {})
+  const elementAttr = Object.values(element.attributes || [])
   return elementAttr.find(a => a.name === key && (!value || a.value === value))
+}
+
+function getAttributes(element) {
+  const elementAttr = Object.values(element.attributes || [])
+  const entries = elementAttr.map(a => [a.name, a.value])
+  return Object.fromEntries(entries)
 }
 
 /**
@@ -292,5 +298,6 @@ module.exports = {
   setElement,
   addOrSetElement,
   generateId,
-  generateUniqueId
+  generateUniqueId,
+  getAttributes,
 }
